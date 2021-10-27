@@ -1,10 +1,11 @@
 import { galleryItems } from './gallery-items.js';
 
-// 1. Create and render picture gallery
 const gallery = document.querySelector('.gallery');
 
+gallery.addEventListener("click", onImageClick);
 createGalleryItems();
 
+// 1. Create and render picture gallery
 function createGalleryItems() {
     const markup = galleryItems
         .map((image) => {
@@ -24,4 +25,16 @@ function createGalleryItems() {
         .join('');
     
     gallery.insertAdjacentHTML("beforeend", markup);
+}
+
+// 2. Gallery delegation
+function onImageClick(event) {
+    // prevent link from opening
+    event.preventDefault();
+
+    if (event.target.nodeName !== "IMG") {
+        return;
+    }
+
+    const imgSource = event.target.dataset.source;
 }
