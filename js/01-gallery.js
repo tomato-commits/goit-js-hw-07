@@ -1,6 +1,7 @@
 import { galleryItems } from './gallery-items.js';
 
 const gallery = document.querySelector('.gallery');
+let instance;
 
 gallery.addEventListener("click", onImageClick);
 createGalleryItems();
@@ -39,10 +40,17 @@ function onImageClick(event) {
     const imgSource = event.target.dataset.source;
 
     // 4. Create image preview modal
-    const instance = basicLightbox.create(`
+    instance = basicLightbox.create(`
         <img src="${imgSource}" width="800" height="600" />
     `);
 
     // 5. Open modal
     instance.show();
 }
+
+// 6. Close modal on escape
+document.addEventListener('keydown', function(event){
+	if (event.key === 'Escape' && instance?.visible()){
+        instance.close();
+	}
+});
