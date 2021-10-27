@@ -37,4 +37,12 @@ function onImageClick(event) {
     }
 
     const imgSource = event.target.dataset.source;
+
+    // 4. Create image preview modal
+    const instance = basicLightbox.create(`
+        <img src="${imgSource}" width="800" height="600" />
+    `);
+
+    // 5. Open modal
+    instance.show();
 }
